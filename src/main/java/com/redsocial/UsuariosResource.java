@@ -11,8 +11,14 @@ public class UsuariosResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        return "Hola JAX-RS con Jersey + Grizzly";
+        UsuariosRepositorio usuarioR = UsuariosRepositorio.getInstance();
+        
+        int cont = usuarioR.sumarContador();
+
+        return "Hola JAX-RS con Jersey + Grizzly: " + cont;
     }
+    
+
 
 
 }

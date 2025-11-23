@@ -1,5 +1,8 @@
-package com.redsocial;
+package ayed.resources;
 
+import ayed.structures.ListaEnlazadaCustom;
+import ayed.structures.NodoEnlazadoCustom;
+import ayed.structures.UsuariosRepositorio;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;

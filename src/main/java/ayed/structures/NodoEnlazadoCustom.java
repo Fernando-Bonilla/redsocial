@@ -1,4 +1,4 @@
-package com.redsocial;
+package ayed.structures;
 
 public class NodoEnlazadoCustom {
     

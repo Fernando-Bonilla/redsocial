@@ -58,5 +58,26 @@ public class UsuariosListaEnlazada {
         }
         
     }
+
+    public boolean ModificarUsuario(String email, String nuevoNombre, String nuevoApellido, String nuevoGenero) {
+        
+        UsuarioNodoListaEnlazada actual = head;
+        
+        while(actual != null) {
+            if(actual.getEmail() != null && actual.getEmail().equals(email)) {
+
+                actual.setNombre(nuevoNombre);
+                actual.setApellido(nuevoApellido);
+                actual.setGenero(nuevoGenero);
+
+                return true;
+
+            }
+
+            actual = actual.getSiguiente();
+        }
+
+        return false;
+    }
     
 }

@@ -38,7 +38,7 @@ public class UsuarioRequestDTO {
     }
 
     public void setApellido(String _value){
-        this.nombre = _value;
+        this.apellido = _value;
     }
 
     public String getGenero(){

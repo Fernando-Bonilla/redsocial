@@ -12,7 +12,7 @@ public class UsuarioNodoListaEnlazada {
     public UsuarioNodoListaEnlazada(){
 
     }
-    
+
     public UsuarioNodoListaEnlazada(String email, String nombre, String apellido, String genero){
         this.email = email;
         this.nombre = nombre;
@@ -41,7 +41,7 @@ public class UsuarioNodoListaEnlazada {
     }
 
     public void setApellido(String _value){
-        this.nombre = _value;
+        this.apellido = _value;
     }
 
     public String getGenero(){
@@ -51,8 +51,6 @@ public class UsuarioNodoListaEnlazada {
     public void setGenero(String _value){
         this.genero = _value;
     }
-
-
 
     public UsuarioNodoListaEnlazada getSiguiente(){
         return _siguiente;

@@ -5,6 +5,7 @@ import java.net.URI;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.jsonb.JsonBindingFeature;
 
 public class Main {  
     // URL base del API
@@ -13,7 +14,8 @@ public class Main {
     public static HttpServer startServer() {
         // Configuración de Jersey: escanea el paquete com.ejemplo
         final ResourceConfig rc = new ResourceConfig()
-                .packages("ayed.resources");
+                .packages("ayed.resources")
+                .register(JsonBindingFeature.class);
 
         // Crea y arranca el server HTTP en BASE_URI
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);

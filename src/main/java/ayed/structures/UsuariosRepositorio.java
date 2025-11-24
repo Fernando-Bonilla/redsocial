@@ -1,11 +1,15 @@
 package ayed.structures;
 
-public class UsuariosRepositorio {
-    private int contador;
+public class UsuariosRepositorio {    
     public static UsuariosRepositorio _instance;
+    private UsuariosListaEnlazada _usuarios;
 
     private UsuariosRepositorio(){
-        this.contador = 0;
+        this._usuarios = new UsuariosListaEnlazada();
+    }
+
+    public UsuariosListaEnlazada getUsuarios(){
+        return _usuarios;
     }
 
     public static UsuariosRepositorio getInstance(){
@@ -16,8 +20,5 @@ public class UsuariosRepositorio {
         return _instance;
     }
 
-    public int sumarContador(){
-        this.contador += 1;
-        return contador;
-    }
+    
 }

@@ -79,5 +79,46 @@ public class UsuariosListaEnlazada {
 
         return false;
     }
+
+    public boolean EliminarUsuario(String email) {        
+
+        if(head == null) {
+            return false;
+        }
+
+        if(head.getEmail() != null && head.getEmail().equals(email)){
+            head = head.getSiguiente();
+
+            if(head == null) {
+                ultimo = null;
+            }
+
+            return true;
+        }
+
+        UsuarioNodoListaEnlazada actual = head;
+
+        while (actual.getSiguiente() != null) {
+
+            UsuarioNodoListaEnlazada siguiente = actual.getSiguiente();
+
+            if(siguiente.getSiguiente().getEmail() != null && siguiente.getSiguiente().getEmail().equals(email)) {
+
+                //aca si lo encuentro lo desconecto y apunto al siguiente del siguiente
+                actual.setSiguiente(siguiente.getSiguiente());
+
+                if(siguiente == ultimo) { //aca el siguiente es el que borro
+                    ultimo = actual; // y aca el anterior pasa a ser el ultimo
+                }
+
+                return true;
+            }
+
+            actual = actual.getSiguiente();
+        }
+
+        // y si llego hasta acá no encontré ningun usuario con ese email
+        return false;
+    }
     
 }

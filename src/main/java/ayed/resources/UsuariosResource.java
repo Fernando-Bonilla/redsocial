@@ -10,7 +10,9 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import ayed.DTOs.UsuarioRequestDTO;
 
 @Path("usuarios")
@@ -57,8 +59,22 @@ public class UsuariosResource {
         if(usuarioUpdateado == false) {
             return null;
         }
-                
+
         return dto;
+    }
+
+    @DELETE
+    @Path("{email}")
+    public Response EliminarUsuario(@PathParam("email") String email){
+        boolean usuarioEliminado = repo.getUsuarios().EliminarUsuario(email);
+
+        if(usuarioEliminado == true){
+            String json = "{ \"mensaje\": \"Usuario '" + email + "' eliminado\" }";
+            return Response.ok(json).build();
+        }else {
+            String json = "{ \"mensaje\": \"Usuario '" + email + "' No encontrado\" }";
+            return Response.status(Response.Status.NOT_FOUND).entity(json).build();
+        }
     }
 
 }

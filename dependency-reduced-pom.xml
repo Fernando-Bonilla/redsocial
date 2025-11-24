@@ -18,7 +18,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>com.redsocial.Main</mainClass>
+                  <mainClass>ayed.Main</mainClass>
                 </transformer>
               </transformers>
             </configuration>
@@ -28,7 +28,7 @@
     </plugins>
   </build>
   <properties>
-    <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
+    <maven.compiler.source>21</maven.compiler.source>
   </properties>
 </project>

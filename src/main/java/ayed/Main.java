@@ -1,6 +1,4 @@
 package ayed;
-
-
 import java.io.IOException;
 import java.net.URI;
 
@@ -15,7 +13,7 @@ public class Main {
     public static HttpServer startServer() {
         // Configuración de Jersey: escanea el paquete com.ejemplo
         final ResourceConfig rc = new ResourceConfig()
-                .packages("com.redsocial");
+                .packages("ayed.resources");
 
         // Crea y arranca el server HTTP en BASE_URI
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
@@ -24,7 +22,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();
         System.out.println("Servidor JAX-RS levantado en " + BASE_URI);
-        System.out.println("Probá: " + BASE_URI + "hello");
+        System.out.println("Probá: " + BASE_URI + "usuarios/hello");
         System.out.println("Presioná ENTER para detener...");
 
         System.in.read();

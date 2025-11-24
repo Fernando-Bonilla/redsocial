@@ -3,6 +3,7 @@ package ayed.config;
 import java.util.HashSet;
 import java.util.Set;
 
+import ayed.resources.UsuariosResource;
 import jakarta.ws.rs.core.Application;
 
 public class AppConfig extends Application {
@@ -11,6 +12,8 @@ public class AppConfig extends Application {
         Set<Class<?>> resources = new HashSet<>();
         // Registra todas tus clases endpoints 
         
+        resources.add(UsuariosResource.class);
+
         return resources;
     }
 }

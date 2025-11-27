@@ -2,18 +2,16 @@ package ayed.structures;
 
 public class ListaCustom<T> {
     private Nodo<T> cabeza;
-    private Nodo<T> siguiente;
+
     private int tamano;
 
     public ListaCustom(Nodo<T> dato) {
         this.cabeza = dato;
-        this.siguiente = null;
         this.tamano = 1;
     }
 
     public ListaCustom() {
         this.cabeza = null;
-        this.siguiente = null;
         this.tamano = 0;
     }
 
@@ -25,7 +23,8 @@ public class ListaCustom<T> {
         return tamano;
     }
 
-    public void agregarAlInicio(Nodo<T> nuevoNodo) {
+    public void agregarAlInicio(T nuevoDato) {
+        Nodo<T> nuevoNodo = new Nodo<T>(nuevoDato);
         nuevoNodo.setSiguiente(cabeza);
         cabeza = nuevoNodo;
         tamano++;

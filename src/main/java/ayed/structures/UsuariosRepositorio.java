@@ -19,6 +19,4 @@ public class UsuariosRepositorio {
 
         return _instance;
     }
-
-    
 }

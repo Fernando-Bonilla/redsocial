@@ -25,10 +25,4 @@ public class Usuario {
     public void setApellido(String apellido) { this.apellido = apellido; }
     public String getGenero() { return genero; }
     public void setGenero(String genero) { this.genero = genero; }
-
-    
-
-    
-
-
 }

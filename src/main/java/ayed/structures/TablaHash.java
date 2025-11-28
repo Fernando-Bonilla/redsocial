@@ -1,17 +1,19 @@
 package ayed.structures;
 
 public class TablaHash<C, V> {
-    private NodoHash<C, V>[] tabla;
+    private final NodoHash<C, V>[] tabla;
 
-    private int capacidad;
+    private final int capacidad;
     private int tamaño;
 
-    public static final int CAPACIDAD_DEFAULT = 101;   //Se sugiere numeros pares para evitar colisiones en el hash
+    public static final int CAPACIDAD_DEFAULT = 101;   //Se sugiere numeros primos para evitar colisiones en el hash
 
+
+    @SuppressWarnings("unchecked")
     public TablaHash() {
         this.capacidad = CAPACIDAD_DEFAULT;
         this.tamaño = 0;
-        this.tabla = new NodoHash[CAPACIDAD_DEFAULT];
+        this.tabla = (NodoHash<C, V>[]) new NodoHash[CAPACIDAD_DEFAULT];
     }
 
     public int getCapacidad() {
@@ -79,4 +81,6 @@ public class TablaHash<C, V> {
 
         return false;
     }
+
+    
 }

@@ -9,7 +9,7 @@ public class NodoUsuarioGrafo {
     public NodoUsuarioGrafo(Usuario usuarioNuevo) {
         this.usuario = usuarioNuevo;
         
-        this.amigosIds = new ListaCustom();
+        this.amigosIds = new ListaCustom<>();
     }
 
     public NodoUsuarioGrafo (){}

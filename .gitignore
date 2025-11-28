@@ -1,2 +1,10 @@
 out
 target
+hs_err_pid10060.log
+hs_err_pid10208.log
+hs_err_pid15356.log
+hs_err_pid17244.log
+replay_pid10060.log
+replay_pid15356.log
+replay_pid10208.log
+replay_pid17244.log

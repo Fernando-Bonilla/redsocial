@@ -1,6 +1,8 @@
 package ayed.services;
 
 import ayed.models.Usuario;
+import ayed.structures.ListaCustom;
+import ayed.structures.Nodo;
 import ayed.structures.NodoUsuarioGrafo;
 import ayed.structures.TablaHash;
 import ayed.structures.UsuariosRepositorio;
@@ -8,9 +10,10 @@ import ayed.structures.UsuariosRepositorio;
 public class ManagerUsuario {
     
     private final TablaHash<Integer, NodoUsuarioGrafo>  usuariosGrafo;
+    private final UsuariosRepositorio usuariosRepo;
 
     public ManagerUsuario() {
-        UsuariosRepositorio usuariosRepo = UsuariosRepositorio.getInstance();
+        this.usuariosRepo = UsuariosRepositorio.getInstance();
         this.usuariosGrafo = usuariosRepo.getGrafoUsuarios();
     }
     
@@ -43,6 +46,22 @@ public class ManagerUsuario {
     public boolean eliminarUsuario(int idUsuario)
     {
         return usuariosGrafo.eliminiar(idUsuario);
+    }
+
+    public ListaCustom<Usuario> obtenerUsuarios(){
+        ListaCustom<NodoUsuarioGrafo> lista;
+        
+        lista = usuariosGrafo.listarValores();
+        Nodo<NodoUsuarioGrafo> actual = lista.getCabeza();
+        ListaCustom<Usuario> usuarios = new ListaCustom<>();
+
+        while(actual != null){
+            usuarios.agregarAlInicio(actual.getDato().getUsuario());
+            actual = actual.getSiguiente();
+        }
+
+        return usuarios;
+
     }
 
 }

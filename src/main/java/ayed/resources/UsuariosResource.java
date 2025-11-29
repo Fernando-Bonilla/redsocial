@@ -5,10 +5,9 @@ import java.time.LocalDateTime;
 import ayed.DTOs.UsuarioRequestDTO;
 import ayed.models.Usuario;
 import ayed.services.ManagerUsuario;
+import ayed.structures.ListaCustom;
 import ayed.structures.NodoUsuarioGrafo;
-import ayed.structures.TablaHash;
 import ayed.structures.UsuarioNodoListaEnlazada;
-import ayed.structures.UsuariosListaEnlazada;
 import ayed.structures.UsuariosRepositorio;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -80,13 +79,17 @@ public class UsuariosResource {
     
     @GET    
     @Produces(MediaType.APPLICATION_JSON)
-    public Response ListarUsuarios(){
+    public Response ListarUsuarios(){        
+        ListaCustom<Usuario> usuarios = managerUsuario.obtenerUsuarios();
 
-        UsuariosListaEnlazada listaCustom = repo.getUsuarios();    
-        
-        TablaHash<Integer, NodoUsuarioGrafo> grafoUsuarios = repo.getGrafoUsuarios();
+        if (usuarios.getTamano() == 0){
+            return Response.status(Status.NO_CONTENT).build();
+        }
+
+        Usuario[] usuariosArray = usuarios.toArray(new Usuario[usuarios.getTamano()]);
 
         return Response.status(Status.OK)
+                .entity(usuariosArray)
                 .build();
     }
 

@@ -82,5 +82,18 @@ public class TablaHash<C, V> {
         return false;
     }
 
-    
+    public ListaCustom<V> listarValores(){
+        ListaCustom<V> lista = new ListaCustom<>();
+        NodoHash<C, V> actual;
+
+        for (int i = 0; i < capacidad; i++){
+            actual = tabla[i];
+            while(actual != null){
+                lista.agregarAlInicio(actual.getValor());
+                actual = actual.getSiguiente();
+            }
+        }
+
+        return lista;
+    }
 }

@@ -14,6 +14,10 @@ public class Nodo<T>{
         return dato;
     }
 
+    public void setDato(T dato){
+        this.dato = dato;
+    }
+
     public Nodo<T> getSiguiente(){
         return siguiente;
     }

@@ -2,8 +2,8 @@ package ayed.structures;
 
 public class UsuariosRepositorio {    
     public static UsuariosRepositorio _instance;
-    private UsuariosListaEnlazada _usuarios;
-    private TablaHash<Integer, NodoUsuarioGrafo> grafoUsuarios;
+    private final UsuariosListaEnlazada _usuarios;
+    private final TablaHash<Integer, NodoUsuarioGrafo> grafoUsuarios;
     private int contadorIds = 0;
 
     private UsuariosRepositorio(){
@@ -29,6 +29,10 @@ public class UsuariosRepositorio {
 
     public int generarIdUsuario(){
         return ++contadorIds;
+    }
+
+    public int obtenerUltimoIdUsuario(){
+        return contadorIds;
     }
 
     public void guardarEnMemoria(){

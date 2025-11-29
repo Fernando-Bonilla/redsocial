@@ -24,9 +24,21 @@ public class ListaCustom<T> {
     }
 
     public void agregarAlInicio(T nuevoDato) {
-        Nodo<T> nuevoNodo = new Nodo<T>(nuevoDato);
+        Nodo<T> nuevoNodo = new Nodo<>(nuevoDato);
         nuevoNodo.setSiguiente(cabeza);
         cabeza = nuevoNodo;
         tamano++;
+    }
+
+    public T[] toArray(T[] array){
+        Nodo<T> actual = cabeza;
+        
+        int i = 0;
+        while(actual != null){
+            array[i++] = actual.getDato();
+            actual = actual.getSiguiente();
+        }
+
+        return array;
     }
 }

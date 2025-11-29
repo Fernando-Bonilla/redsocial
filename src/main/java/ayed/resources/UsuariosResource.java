@@ -7,6 +7,7 @@ import ayed.DTOs.UsuarioRequestDTO;
 import ayed.models.Usuario;
 import ayed.services.ManagerUsuario;
 import ayed.structures.ListaCustom;
+import ayed.structures.Nodo;
 import ayed.structures.NodoUsuarioGrafo;
 import ayed.structures.UsuarioNodoListaEnlazada;
 import ayed.structures.UsuariosRepositorio;
@@ -33,19 +34,14 @@ public class UsuariosResource {
     @Produces(MediaType.APPLICATION_JSON)    
     public Response crearUsuario(UsuarioRequestDTO dto){
         if(dto == null){
-            return null;
-        }
+            return Response.status(Status.BAD_REQUEST)
+                .entity(" ")
+                .build();
+        }           
 
-        UsuarioNodoListaEnlazada nodo = new UsuarioNodoListaEnlazada();
-        nodo.setEmail(dto.getEmail());
-        nodo.setNombre(dto.getNombre());
-        nodo.setApellido(dto.getApellido());        
-        nodo.setGenero(dto.getGenero());
-
-        repo.getUsuarios().AgregarNodo(nodo);
-
-        // Agregar al grafo
-        Usuario nuevo = new Usuario (repo.generarIdUsuario(),
+        int usuarioId = repo.generarIdUsuario();
+        Usuario nuevo = new Usuario (
+            usuarioId,
             dto.getEmail(),
             dto.getNombre(),
             dto.getApellido(),
@@ -53,6 +49,10 @@ public class UsuariosResource {
             LocalDateTime.now()
         );
 
+        // Guarda en la lista enlazada generica
+        repo.getUsuarios().agregarAlInicio(nuevo);
+
+        // Guarda en el grafo/hash TablaHash<Integer, NodoUsuarioGrafo>
         boolean result = managerUsuario.agregarUsuario(nuevo);
 
         if (result == false){

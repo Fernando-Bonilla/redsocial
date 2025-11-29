@@ -40,42 +40,6 @@ public class PublicacionesResource {
         return dto;
     }     
     
-    @GET    
-    @Produces(MediaType.APPLICATION_JSON)
-    public String ListarPublicaciones(){
-
-        UsuariosListaEnlazada listaCustom = repo.getUsuarios();       
-
-        return listaCustom.ListarUsuarios();
-    }
-
-    @PUT
-    public UsuarioRequestDTO ModificarUsuario(UsuarioRequestDTO dto){
-        if(dto == null){
-            return null;
-        }
-
-        boolean usuarioUpdateado = repo.getUsuarios().ModificarUsuario(dto.getEmail(), dto.getNombre(), dto.getApellido(), dto.getGenero());
-
-        if(usuarioUpdateado == false) {
-            return null;
-        }
-
-        return dto;
-    }
-
-    @DELETE
-    @Path("{email}")
-    public Response EliminarPublicacion(@PathParam("email") String email){
-        boolean usuarioEliminado = repo.getUsuarios().EliminarUsuario(email);
-
-        if(usuarioEliminado == true){
-            String json = "{ \"mensaje\": \"Usuario '" + email + "' eliminado\" }";
-            return Response.ok(json).build();
-        }else {
-            String json = "{ \"mensaje\": \"Usuario '" + email + "' No encontrado\" }";
-            return Response.status(Response.Status.NOT_FOUND).entity(json).build();
-        }
-    }
+    
 
 }

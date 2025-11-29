@@ -1,17 +1,22 @@
 package ayed.structures;
 
+import java.time.LocalDateTime;
+
+import ayed.models.Usuario;
+
 public class UsuariosRepositorio {    
     public static UsuariosRepositorio _instance;
-    private final UsuariosListaEnlazada _usuarios;
+    private final ListaCustom<Usuario> _usuarios;
     private final TablaHash<Integer, NodoUsuarioGrafo> grafoUsuarios;
     private int contadorIds = 0;
 
     private UsuariosRepositorio(){
-        this._usuarios = new UsuariosListaEnlazada();
+        this._usuarios = new ListaCustom<>();
         this.grafoUsuarios = new TablaHash<>();
+        crearUsuariosParaPrueba();
     }
 
-    public UsuariosListaEnlazada getUsuarios(){
+    public ListaCustom<Usuario> getUsuarios(){
         return _usuarios;
     }
 
@@ -41,5 +46,39 @@ public class UsuariosRepositorio {
 
     public void cargarDeMemoria(){
         //Logica para cargar el archivo local y deserializar
+    }
+
+    private void crearUsuariosParaPrueba(){
+        crearUsuarioInicial("alberto@gmail.com", "Alberto", "García", "M");
+        crearUsuarioInicial("pepe@gmail.com", "Pepe",   "Pérez",  "M");
+        crearUsuarioInicial("carla@gmail.com", "Carla", "López",  "F");
+        crearUsuarioInicial("cecilia@gmail.com", "Cecilia", "López",  "F");
+        crearUsuarioInicial("fefo@gmail.com", "Fede", "Roro",  "M");
+        crearUsuarioInicial("fernando@gmail.com", "Fernando", "Bonilla",  "M");
+        crearUsuarioInicial("matias@gmail.com", "Matias", "Arruabarrena",  "M");
+        crearUsuarioInicial("rupestre@gmail.com", "Ruben", "Yorugua",  "M");
+        crearUsuarioInicial("laMona@gmail.com", "Ramon", "Gimenez",  "M");
+        crearUsuarioInicial("pipi@gmail.com", "Pipona", "Alberti",  "F");
+        crearUsuarioInicial("miguelAltoChango@gmail.com", "Miguel", "Perez",  "M");
+        crearUsuarioInicial("natalia@gmail.com", "Natalia", "Murriaga",  "F");
+
+    }
+
+    private void crearUsuarioInicial(String email, String nombre, String apellido, String genero){
+        int id = generarIdUsuario();
+
+        Usuario usuario = new Usuario(
+            id,
+            email,
+            nombre,
+            apellido,
+            genero,
+            LocalDateTime.now()
+        );
+
+        _usuarios.agregarAlInicio(usuario);
+        NodoUsuarioGrafo nodo = new NodoUsuarioGrafo(usuario);
+        grafoUsuarios.insertar(id, nodo);
+
     }
 }

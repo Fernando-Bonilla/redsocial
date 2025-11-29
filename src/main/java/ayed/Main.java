@@ -24,7 +24,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();
         System.out.println("Servidor JAX-RS levantado en " + BASE_URI);
-        System.out.println("Probá: " + BASE_URI + "usuarios/hello");
+        System.out.println("Probá: " + BASE_URI + "usuarios");
         System.out.println("Presioná ENTER para detener...");
 
         System.in.read();

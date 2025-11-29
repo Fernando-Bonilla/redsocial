@@ -13,18 +13,19 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import ayed.DTOs.PublicacionRequestDTO;
 import ayed.DTOs.UsuarioRequestDTO;
 
-@Path("usuarios")
+@Path("publicaciones")
 @Consumes(MediaType.APPLICATION_JSON)
-public class UsuariosResource {
+public class PublicacionesResource {
 
     private final UsuariosRepositorio repo = UsuariosRepositorio.getInstance(); // singleton para poder tener persistencia entre requests
     
     @POST
     @Produces(MediaType.APPLICATION_JSON)    
-    public UsuarioRequestDTO crearUsuario(UsuarioRequestDTO dto){
-        if(dto == null){
+    public PublicacionRequestDTO crearPublicacion(PublicacionRequestDTO dto){
+        /* if(dto == null){
             return null;
         }
 
@@ -34,14 +35,14 @@ public class UsuariosResource {
         nodo.setApellido(dto.getApellido());        
         nodo.setGenero(dto.getGenero());
 
-        repo.getUsuarios().AgregarNodo(nodo);
+        repo.getUsuarios().AgregarNodo(nodo); */
 
         return dto;
     }     
     
     @GET    
     @Produces(MediaType.APPLICATION_JSON)
-    public String ListarUsuarios(){
+    public String ListarPublicaciones(){
 
         UsuariosListaEnlazada listaCustom = repo.getUsuarios();       
 
@@ -65,7 +66,7 @@ public class UsuariosResource {
 
     @DELETE
     @Path("{email}")
-    public Response EliminarUsuario(@PathParam("email") String email){
+    public Response EliminarPublicacion(@PathParam("email") String email){
         boolean usuarioEliminado = repo.getUsuarios().EliminarUsuario(email);
 
         if(usuarioEliminado == true){

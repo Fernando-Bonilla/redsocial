@@ -22,8 +22,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
-
-
 @Path("usuarios")
 @Consumes(MediaType.APPLICATION_JSON)
 public class UsuariosResource {
@@ -48,11 +46,12 @@ public class UsuariosResource {
 
         // Agregar al grafo
         Usuario nuevo = new Usuario (repo.generarIdUsuario(),
-                                                dto.getEmail(),
-                                                dto.getNombre(),
-                                                dto.getApellido(),
-                                                dto.getGenero(),
-                                                LocalDateTime.now());
+            dto.getEmail(),
+            dto.getNombre(),
+            dto.getApellido(),
+            dto.getGenero(),
+            LocalDateTime.now()
+        );
 
         boolean result = managerUsuario.agregarUsuario(nuevo);
 
@@ -117,7 +116,7 @@ public class UsuariosResource {
 
     @DELETE
     @Path("{idUsuario}")
-    public Response EliminarUsuario(@PathParam("idUsuario") int  idUsuario){        
+    public Response EliminarUsuario(@PathParam("idUsuario") int idUsuario){        
         NodoUsuarioGrafo nodoUsuario = repo.getGrafoUsuarios().buscar(idUsuario);
 
         if(nodoUsuario == null){

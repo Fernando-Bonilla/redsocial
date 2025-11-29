@@ -8,7 +8,6 @@ public class TablaHash<C, V> {
 
     public static final int CAPACIDAD_DEFAULT = 101;   //Se sugiere numeros primos para evitar colisiones en el hash
 
-
     @SuppressWarnings("unchecked")
     public TablaHash() {
         this.capacidad = CAPACIDAD_DEFAULT;

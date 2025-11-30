@@ -132,4 +132,41 @@ public class UsuariosResource {
         return Response.status(Status.OK).entity("Usuario id : " + idUsuario + " eliminado correctamente").build();
     }
 
+    @POST
+    @Path("{idUsuario}/seguir/{idAmigo}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response seguirUsuario(@PathParam("idUsuario") int idUsuario, @PathParam("idAmigo") int idAmigo){
+
+        if(idUsuario == idAmigo){
+            return Response.status(Status.BAD_REQUEST)
+                .entity("Un usuario no puede seguirse a si mismo")
+                .build();            
+        }       
+        
+        // busco en la tabla hash para chequear si existen ambos, seguidor y seguido
+        NodoUsuarioGrafo nodoSeguidor = repo.getGrafoUsuarios().buscar(idUsuario);
+        NodoUsuarioGrafo nodoSeguido = repo.getGrafoUsuarios().buscar(idAmigo);        
+        
+        if(nodoSeguidor == null || nodoSeguido == null){
+            return Response.status(Status.NOT_FOUND)
+                .entity("Alguno de los usuarios no existe")
+                .build();
+        }
+
+        boolean result = managerUsuario.agregarAmigo(idUsuario, idAmigo);
+
+        String emailSeguidor = nodoSeguidor.getUsuario().getEmail();
+        String emailSeguido = nodoSeguido.getUsuario().getEmail();
+
+        if(result == true){
+            return Response.status(Status.OK)
+                .entity("Usuario: "+ emailSeguidor + " ahora sigue a: " + emailSeguido)
+                .build();
+        }else{
+            return Response.status(Status.BAD_REQUEST)
+                .entity("No se pudo realizar la accion")
+                .build();
+        }
+    }
+
 }

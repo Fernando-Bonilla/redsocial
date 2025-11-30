@@ -9,7 +9,7 @@ import ayed.structures.UsuariosRepositorio;
 
 public class ManagerUsuario {
     
-    private final TablaHash<Integer, NodoUsuarioGrafo>  usuariosGrafo;
+    private final TablaHash<Integer, NodoUsuarioGrafo> usuariosGrafo;
     private final UsuariosRepositorio usuariosRepo;
 
     public ManagerUsuario() {

@@ -1,8 +1,8 @@
 package ayed.resources;
 
-import ayed.structures.UsuariosListaEnlazada;
-import ayed.structures.UsuarioNodoListaEnlazada;
 import ayed.structures.UsuariosRepositorio;
+import ayed.structures.NodoUsuarioGrafo;
+import ayed.structures.PublicacionesRepositorio;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -13,31 +13,49 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 import ayed.DTOs.PublicacionRequestDTO;
-import ayed.DTOs.UsuarioRequestDTO;
+import ayed.models.Publicacion;
 
 @Path("publicaciones")
 @Consumes(MediaType.APPLICATION_JSON)
 public class PublicacionesResource {
 
+    private final PublicacionesRepositorio pubRepo = PublicacionesRepositorio.getInstance();
     private final UsuariosRepositorio repo = UsuariosRepositorio.getInstance(); // singleton para poder tener persistencia entre requests
     
     @POST
     @Produces(MediaType.APPLICATION_JSON)    
-    public PublicacionRequestDTO crearPublicacion(PublicacionRequestDTO dto){
-        /* if(dto == null){
-            return null;
+    public Response crearPublicacion(PublicacionRequestDTO dto){
+        if(dto == null){
+            return Response.status(Status.BAD_REQUEST)
+                .entity("Completar los datos por favor")
+                .build();
         }
 
-        UsuarioNodoListaEnlazada nodo = new UsuarioNodoListaEnlazada();
-        nodo.setEmail(dto.getEmail());
-        nodo.setNombre(dto.getNombre());
-        nodo.setApellido(dto.getApellido());        
-        nodo.setGenero(dto.getGenero());
+        int idAutor = dto.getIdAutor();
+        String cuerpoPub = dto.getCuerpoPublicacion();
 
-        repo.getUsuarios().AgregarNodo(nodo); */
+        if(cuerpoPub == null || cuerpoPub.isEmpty()) {
+            return Response.status(Status.BAD_REQUEST)
+                .entity("Por favor agregar contenido al cuerpo de la publicacion")
+                .build();
+        }
+        
+        // Valido que exista el usuario autor en el grafo/tabla hash
+        NodoUsuarioGrafo nodoAutor = repo.getGrafoUsuarios().buscar(idAutor);
+        if(nodoAutor == null) {
+            return Response.status(Status.NOT_FOUND)
+                .entity("No existe el usuario")
+                .build();
+        }
 
-        return dto;
+        // Ahora creo la puclikeishon
+        Publicacion nuevaPub = pubRepo.agregarPublicacion(idAutor, cuerpoPub);
+               
+        return Response.status(Status.CREATED)
+            .entity(nuevaPub)
+            .build();
     }     
     
     

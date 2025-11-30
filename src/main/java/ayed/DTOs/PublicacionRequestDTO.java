@@ -1,24 +1,24 @@
 package ayed.DTOs;
 
 public class PublicacionRequestDTO {
-    private String emailAutor;
+    private int idAutor;
     private String cuerpoPublicacion;    
 
     public PublicacionRequestDTO(){
 
     }
 
-    public PublicacionRequestDTO(String emailAutor, String cuerpoPublicacion){
-        this.emailAutor = emailAutor;
+    public PublicacionRequestDTO(int idAutor, String cuerpoPublicacion){
+        this.idAutor = idAutor;
         this.cuerpoPublicacion = cuerpoPublicacion;        
     }
 
-    public String getEmailAutor(){
-        return emailAutor;
+    public int getIdAutor(){
+        return idAutor;
     }
 
-    public void setEmailAutor(String _value){
-        this.emailAutor = _value;
+    public void setIdAutor(int _value){
+        this.idAutor = _value;
     }
 
     public String getCuerpoPublicacion(){
@@ -27,8 +27,6 @@ public class PublicacionRequestDTO {
 
     public void setCuerpoPublicacion(String _value){
         this.cuerpoPublicacion = _value;
-    }   
-
-
+    }
 
 }

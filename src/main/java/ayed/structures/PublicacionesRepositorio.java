@@ -37,9 +37,24 @@ public class PublicacionesRepositorio {
     public int generarIdPublicacion(){
         return ++contadorIds;
     }
-    
 
-    
+    public Publicacion agregarPublicacion(int idAutor, String cuerpoPublicacion){
+        int idPublicacion = generarIdPublicacion();
+
+        Publicacion nuevaPublicacion = new Publicacion(
+            idPublicacion, 
+            cuerpoPublicacion, 
+            idAutor, 
+            LocalDateTime.now()
+        );
+
+        // aca lo guardo en la lista enlazada, que me va a servir para recorrer y ver la que tiene mas comentario
+        _publicaciones.agregarAlInicio(nuevaPublicacion);
+        // y aca lo agrego a la HashMap indexado
+        _indicePublicaciones.insertar(idPublicacion, nuevaPublicacion);
+
+        return nuevaPublicacion;
+    }    
 
     private void crearPublicacionesParaPrueba(){
         crearPublicacionInicial(1, "Testeando publicacion");

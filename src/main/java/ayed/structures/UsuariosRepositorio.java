@@ -2,6 +2,7 @@ package ayed.structures;
 
 import java.time.LocalDateTime;
 
+import ayed.models.Notificacion;
 import ayed.models.Usuario;
 
 public class UsuariosRepositorio {    
@@ -40,13 +41,13 @@ public class UsuariosRepositorio {
         return contadorIds;
     }
 
-    public void guardarEnMemoria(){
-        //Logica para serializar y guardar en un archivo local
-    }
+    // metodo que voy a usar en Publicaciones Agregar y cuando un usuario mme sigue, para agregarle una nueva notificacion
+    public void agregarNotificacion(int idAutorPublicacion, String mensaje) {
+        Usuario usuarioAutorPublicacion = _instance.getGrafoUsuarios().buscar(idAutorPublicacion).getUsuario();
+        Notificacion notificacion = new Notificacion(mensaje);
+        usuarioAutorPublicacion.getNotificaciones().agregarNodo(notificacion);
 
-    public void cargarDeMemoria(){
-        //Logica para cargar el archivo local y deserializar
-    }
+    }     
 
     private void crearUsuariosParaPrueba(){
         crearUsuarioInicial("alberto@gmail.com", "Alberto", "García", "M");

@@ -6,6 +6,7 @@ public class NodoUsuarioGrafo {
     private Usuario usuario;
     private ListaCustom<Integer> amigosIds;
 
+
     public NodoUsuarioGrafo(Usuario usuarioNuevo) {
         this.usuario = usuarioNuevo;
         
@@ -23,6 +24,9 @@ public class NodoUsuarioGrafo {
 
     public void setAmigosId(Integer amigoId){
         this.amigosIds.agregarAlInicio(amigoId);
+
+        // Aca llamo a este metodo para agregar una notificacion cada vez que recibe un nuevo amigo
+        UsuariosRepositorio.getInstance().agregarNotificacion(this.usuario.getIdUsuario(), "Usted a recibido un nuevo amichi");
     }
 
     public void setUsuario(Usuario usuario) {

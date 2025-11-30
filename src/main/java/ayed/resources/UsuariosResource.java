@@ -5,8 +5,10 @@ import java.time.LocalDateTime;
 import ayed.DTOs.ModUsuarioRequestDTO;
 import ayed.DTOs.UsuarioRequestDTO;
 import ayed.models.Usuario;
+import ayed.models.Notificacion;
 import ayed.services.ManagerUsuario;
 import ayed.structures.ListaCustom;
+import ayed.structures.ListaCola;
 import ayed.structures.Nodo;
 import ayed.structures.NodoUsuarioGrafo;
 import ayed.structures.UsuarioNodoListaEnlazada;
@@ -168,5 +170,53 @@ public class UsuariosResource {
                 .build();
         }
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("{idUsuario}/notificaciones")
+    public Response notificaciones(@PathParam("idUsuario") int idUsuario){
+
+        if(idUsuario <= 0) {
+            return Response.status(Status.BAD_REQUEST)
+                .entity("Pasame el id del usuario papi")
+                .build();
+        }
+
+        // Busco el nodo del usuario en el grafo
+        NodoUsuarioGrafo nodoUsuario = repo.getGrafoUsuarios().buscar(idUsuario);
+        if (nodoUsuario == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                .entity("Usuario no encontrado")
+                .build();
+        }
+
+        Usuario usuario = nodoUsuario.getUsuario();
+        ListaCola<Notificacion> listaNotificaciones = usuario.getNotificaciones();
+
+        // Paso la cola a una ListaCustom, consumiendo la cola (ListaCola)
+        ListaCustom<Notificacion> lista = new ListaCustom<>();
+        Nodo<Notificacion> nodo;
+
+        while ((nodo = listaNotificaciones.eliminarPrimerElemento()) != null) {
+            lista.agregarAlInicio(nodo.getDato());
+        }
+
+        // Si no hay notificaciones, devuevlo array vacio
+        if (lista.getTamano() == 0) {
+            return Response.status(Response.Status.OK)
+                .entity(new Notificacion[0])
+                .build();
+        }
+
+        // Pasamos ListaCustom a Notificacion[] array
+        Notificacion[] arrayNotificaciones = lista.toArray(new Notificacion[lista.getTamano()]);
+
+        return Response.status(Response.Status.OK)
+            .entity(arrayNotificaciones)
+            .build();
+
+    }  
+          
 
 }

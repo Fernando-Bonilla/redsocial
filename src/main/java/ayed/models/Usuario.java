@@ -46,7 +46,5 @@ public class Usuario {
         return notificaciones;
     }
 
-    public void AgregarNotificacionAlaCola(){
-        notificaciones.agregarAlInicio(null);
-    }
+    
 }

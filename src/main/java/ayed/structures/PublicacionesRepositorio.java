@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 
 import ayed.models.Comentario;
+import ayed.models.Notificacion;
 import ayed.models.Publicacion;
 import ayed.models.Usuario;
 
@@ -83,6 +84,10 @@ public class PublicacionesRepositorio {
 
         publicacion.getComentarios().agregarAlInicio(nuevComentario);      
         
+        // Uso este metodo para agregarle una notificacion al autor cada vez que recibe un comentario
+        
+        _repoUsuarios.agregarNotificacion(publicacion.getIdAutor(),  "Se agregó un nuevo comentario a una de tus publicaciones");      
+
         return nuevComentario;
         
     }

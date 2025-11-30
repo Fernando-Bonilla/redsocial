@@ -3,6 +3,7 @@ package ayed.structures;
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 
+import ayed.models.Comentario;
 import ayed.models.Publicacion;
 import ayed.models.Usuario;
 
@@ -62,6 +63,28 @@ public class PublicacionesRepositorio {
         Publicacion[] arrayPublicaciones = _publicaciones.toArray(new Publicacion[contadorIds]);
         
         return arrayPublicaciones;
+    }
+
+    public Comentario comentarPublicacion(int idPub, int idAutorComentario , String comentarioCuerpo){
+
+        Publicacion publicacion = _indicePublicaciones.buscar(idPub);
+        // Buscar publicación        
+        if (publicacion == null) {
+            // No existe la publicación
+            return null;
+        }
+
+        Comentario nuevComentario = new Comentario(
+            comentarioCuerpo, 
+            LocalDateTime.now(), 
+            idAutorComentario, 
+            idPub
+        );
+
+        publicacion.getComentarios().agregarAlInicio(nuevComentario);      
+        
+        return nuevComentario;
+        
     }
 
     private void crearPublicacionesParaPrueba(){

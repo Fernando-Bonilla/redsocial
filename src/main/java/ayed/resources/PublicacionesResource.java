@@ -14,7 +14,13 @@ import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+
+import java.time.LocalDateTime;
+
+import ayed.DTOs.ComentarioRequestDTO;
+import ayed.DTOs.ModUsuarioRequestDTO;
 import ayed.DTOs.PublicacionRequestDTO;
+import ayed.models.Comentario;
 import ayed.models.Publicacion;
 
 @Path("publicaciones")
@@ -69,5 +75,56 @@ public class PublicacionesResource {
             .build();
 
     }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("{idPublicacion}/comentar")
+    public Response comentarPublicacion(@PathParam("idPublicacion") int idPublicacion, ComentarioRequestDTO dto){
+
+        /* System.out.println("idPublicacion: " + idPublicacion + "idAutor: ");
+
+        return Response.status(Status.ACCEPTED)
+            .entity("asd")
+            .build(); */
+
+        if (dto == null) {
+        return Response.status(Status.BAD_REQUEST)
+            .entity("viene body vacío")
+            .build();
+        }
+
+        if(dto.getCuerpoComentario() == null || dto.getIdAutor() <= 0){
+            return Response.status(Status.BAD_REQUEST)
+                .entity("Completame bien los datos amichi")
+                .build();
+        }
+
+        // valido que exista el usuario autor del comentario
+        NodoUsuarioGrafo autorComentario = repo.getGrafoUsuarios().buscar(dto.getIdAutor());
+        if(autorComentario == null) {
+            return Response.status(Status.BAD_REQUEST)
+                .entity("No existe el usuario autor del comentario")
+                .build();
+        }
+
+        // valido que exista la publicación
+        Publicacion pub = pubRepo.getIndicePublicaciones().buscar(idPublicacion);
+        if (pub == null) {
+            return Response.status(Status.NOT_FOUND)
+                .entity("No existe la publicación con id = " + idPublicacion)
+                .build();
+        }
+
+        // Agregdo el comentario en el repositorio
+        Comentario nuevComentario = pubRepo.comentarPublicacion(idPublicacion, dto.getIdAutor(), dto.getCuerpoComentario());
+        
+        return Response.status(Status.ACCEPTED)
+            .entity("comentario agregado: " + nuevComentario.getComentario())
+            .build();
+
+    }
+
+    
 
 }

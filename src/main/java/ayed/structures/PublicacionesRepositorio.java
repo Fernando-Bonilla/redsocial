@@ -1,5 +1,6 @@
 package ayed.structures;
 
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 
 import ayed.models.Publicacion;
@@ -55,6 +56,13 @@ public class PublicacionesRepositorio {
 
         return nuevaPublicacion;
     }    
+
+    // aca devuelvo un array porque ya tengo el total de publicaciones
+    public Publicacion[] listarPubliciones(){
+        Publicacion[] arrayPublicaciones = _publicaciones.toArray(new Publicacion[contadorIds]);
+        
+        return arrayPublicaciones;
+    }
 
     private void crearPublicacionesParaPrueba(){
         crearPublicacionInicial(1, "Testeando publicacion");

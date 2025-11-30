@@ -58,6 +58,16 @@ public class PublicacionesResource {
             .build();
     }     
     
-    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listar(){
+
+        Publicacion[] arrayPub = pubRepo.listarPubliciones();
+
+        return Response.status(Status.ACCEPTED)
+            .entity(arrayPub)
+            .build();
+
+    }
 
 }

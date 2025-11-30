@@ -1,16 +1,17 @@
 package ayed.models;
 
-public class Notificacion {
-    private int idNotificacion;
+public class Notificacion {    
     private String mensaje;
 
-    public Notificacion(int idNotificacion, String mensaje) {
-        this.idNotificacion = idNotificacion;
+    public Notificacion(String mensaje) {        
         this.mensaje = mensaje;
     }
 
-    public int getIdNotificacion() { return idNotificacion; }
-    public void setIdNotificacion(int idNotificacion) { this.idNotificacion = idNotificacion; }
-    public String getMensaje() { return mensaje; }
-    public void setMensaje(String mensaje) { this.mensaje = mensaje; }
+    public String getMensaje() {
+        return mensaje; 
+    }
+
+    public void setMensaje(String mensaje) { 
+        this.mensaje = mensaje; 
+    }
 }

@@ -2,6 +2,7 @@ package ayed.models;
 
 import java.time.LocalDateTime;
 
+import ayed.structures.ListaCola;
 
 public class Usuario {
     private int idUsuario;
@@ -11,6 +12,8 @@ public class Usuario {
     private String genero;
     private LocalDateTime fechaRegistro;
 
+    private ListaCola<Notificacion> notificaciones;
+
     public Usuario(int idUsuario, String email, String nombre, String apellido, String genero, LocalDateTime fechaRegistro) {
         this.idUsuario = idUsuario;
         this.email = email;
@@ -18,6 +21,10 @@ public class Usuario {
         this.apellido = apellido;
         this.genero = genero;
         this.fechaRegistro = fechaRegistro;
+
+        // por las dudas creo una lista vacia para evitar conflictos
+        this.notificaciones = new ListaCola<Notificacion>();
+
     }
 
     public Usuario() {}
@@ -34,4 +41,12 @@ public class Usuario {
     public void setGenero(String genero) { this.genero = genero; }
     public LocalDateTime getFechaRegistro() { return fechaRegistro; }
     public void setFechaRegistro(LocalDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
+
+    public ListaCola<Notificacion> getNotificaciones(){
+        return notificaciones;
+    }
+
+    public void AgregarNotificacionAlaCola(){
+        notificaciones.agregarAlInicio(null);
+    }
 }

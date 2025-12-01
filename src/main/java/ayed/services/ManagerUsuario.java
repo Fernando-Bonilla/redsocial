@@ -31,8 +31,8 @@ public class ManagerUsuario {
 
     public boolean agregarAmigo(int idUsuario, int idAmigo)
     {
-        NodoUsuarioGrafo nodoUsuario = usuariosGrafo.buscar(idUsuario);
-        NodoUsuarioGrafo nodoAmigo = usuariosGrafo.buscar(idAmigo);
+        NodoUsuarioGrafo nodoUsuario = usuariosGrafo.buscar(idUsuario); //para no buscarlo dos veces, podriamos recibir el nodo directamente
+        NodoUsuarioGrafo nodoAmigo = usuariosGrafo.buscar(idAmigo);     //por paramentro en este metodo, ya que en el endpoint ya lo buscamos.
 
         if(nodoUsuario == null || nodoAmigo == null){
             return false;
@@ -108,6 +108,47 @@ public class ManagerUsuario {
         }
 
         return amigosEnComun;
+    }
+
+    public ListaCustom<Usuario> obtenerAmigosDeAmigos(int idUsuario){
+
+        //Lo implemento con tabla Hash para poder buscar en el array mas rapido y corroborar no repetidos. Ya que esta implementado 
+        //todo para pasar de una lista hash a una lista.
+
+        NodoUsuarioGrafo nodoUsuario = usuariosGrafo.buscar(idUsuario);
+        TablaHash<Integer, Usuario> amigosDeAmigo = new TablaHash<>();
+
+        if(nodoUsuario == null){
+            return amigosDeAmigo.listarValores();
+        }
+
+        Nodo<Integer> actualAmigo = nodoUsuario.getAmigosIds().getCabeza();
+        Nodo<Integer> amigoDeAmigo;
+
+        while(actualAmigo != null){
+            int idAmigo = actualAmigo.getDato();
+            NodoUsuarioGrafo nodoAmigo = usuariosGrafo.buscar(idAmigo);
+            
+            amigoDeAmigo = nodoAmigo.getAmigosIds().getCabeza();
+            while(amigoDeAmigo != null){
+                int idAmigoDeAmigo = amigoDeAmigo.getDato();
+                
+                if (idAmigoDeAmigo != idUsuario && amigosDeAmigo.buscar(idAmigo) == null)
+                {
+                    NodoUsuarioGrafo nodoAmigoDeAmigo = usuariosGrafo.buscar(idAmigoDeAmigo);
+                    if (nodoAmigoDeAmigo != null) {
+                        amigosDeAmigo.insertar(idAmigoDeAmigo, nodoAmigoDeAmigo.getUsuario());
+                    }
+                }
+
+                amigoDeAmigo = amigoDeAmigo.getSiguiente();
+            }
+
+            actualAmigo = actualAmigo.getSiguiente();
+
+        }
+
+        return amigosDeAmigo.listarValores();
     }
 
 }

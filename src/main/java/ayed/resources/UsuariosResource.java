@@ -11,7 +11,6 @@ import ayed.structures.ListaCustom;
 import ayed.structures.ListaCola;
 import ayed.structures.Nodo;
 import ayed.structures.NodoUsuarioGrafo;
-import ayed.structures.UsuarioNodoListaEnlazada;
 import ayed.structures.UsuariosRepositorio;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -217,6 +216,45 @@ public class UsuariosResource {
             .build();
 
     }  
-          
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{idUsuarioUno}/amigos-en-comun/{idUsuarioDos}")
+    public Response amigosEnComun(@PathParam("idUsuarioUno") int idUsuarioUno, @PathParam("idUsuarioDos") int idUsuarioDos){
+
+        // validamos los ids
+        if(idUsuarioUno <= 0 || idUsuarioDos <= 0){
+            return Response.status(Status.BAD_REQUEST)
+                .entity("pasame bien los ids por favor")
+                .build();
+        }
+
+        // validamos que existan los usuarios
+        NodoUsuarioGrafo nodoUsuarioUno = repo.getGrafoUsuarios().buscar(idUsuarioUno);
+        NodoUsuarioGrafo nodoUsuarioDos = repo.getGrafoUsuarios().buscar(idUsuarioDos);
+
+        if(nodoUsuarioUno == null || nodoUsuarioDos == null) {
+            return Response.status(Status.BAD_REQUEST)
+                .entity("Alguno de los usuarios no existen")
+                .build();
+        }
+
+        // ahora que hice todos los chequeos llamo al metood amigosEnComun en ManagerUsuario
+        ListaCustom<Usuario> listaConAmichis = managerUsuario.amigosEnComun(idUsuarioUno, idUsuarioDos);
+
+        if(listaConAmichis.getTamano() == 0){
+            return Response.status(Status.ACCEPTED)
+                .entity("No hay amigos en comun")
+                .build();
+        }
+
+        // si hay amigos en comun paso la lista a un array de tipo Usuario
+        Usuario[] arrayAmigos = listaConAmichis.toArray(new Usuario[listaConAmichis.getTamano()]);
+
+        return Response.status(Status.ACCEPTED)
+            .entity(arrayAmigos)
+            .build();
+
+    }      
 
 }

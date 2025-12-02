@@ -257,24 +257,9 @@ public class UsuariosResource {
 
     }
     
-/*     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{idUsuario}/amigos-de-amigos")
-    public Response obtenerAmigosdeAmigos(@PathParam("idUsuario") int idUsuario){
-
-        NodoUsuarioGrafo nodoUsuario = repo.getGrafoUsuarios().buscar(idUsuario);
-        if (nodoUsuario == null) {
-            return Response.status(Status.BAD_REQUEST)
-                .entity("No existe usuario con ese id")
-                .build();
-        }
-
-
-    } */
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("AmigosDeAmigos/{idUsuario}")
+    @Path("{idUsuario}/amigos-de-amigos")
     public Response amigosDeAmigos(@PathParam("idUsuario") int idUsuario){
         NodoUsuarioGrafo nodoUsuario = repo.getGrafoUsuarios().buscar(idUsuario);
 

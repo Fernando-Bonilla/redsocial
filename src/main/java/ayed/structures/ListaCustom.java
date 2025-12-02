@@ -15,6 +15,10 @@ public class ListaCustom<T> {
         this.tamano = 0;
     }
 
+    public void setCabeza(Nodo<T> cabeza) {
+        this.cabeza = cabeza;
+    }
+
     public Nodo<T> getCabeza() {
         return cabeza;
     }

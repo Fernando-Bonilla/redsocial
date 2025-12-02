@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 
 import ayed.DTOs.ModUsuarioRequestDTO;
 import ayed.DTOs.UsuarioRequestDTO;
-import ayed.models.Usuario;
 import ayed.models.Notificacion;
+import ayed.models.Usuario;
 import ayed.services.ManagerUsuario;
-import ayed.structures.ListaCustom;
 import ayed.structures.ListaCola;
+import ayed.structures.ListaCustom;
 import ayed.structures.Nodo;
 import ayed.structures.NodoUsuarioGrafo;
 import ayed.structures.UsuariosRepositorio;
@@ -271,5 +271,26 @@ public class UsuariosResource {
 
 
     } */
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("AmigosDeAmigos/{idUsuario}")
+    public Response amigosDeAmigos(@PathParam("idUsuario") int idUsuario){
+        NodoUsuarioGrafo nodoUsuario = repo.getGrafoUsuarios().buscar(idUsuario);
+
+        if (nodoUsuario == null) {
+            return Response.status(Status.NOT_FOUND)
+                .entity("No existe el usuario")
+                .build();
+        }
+
+        ListaCustom<Usuario> amigosDeAmigos = managerUsuario.obtenerAmigosDeAmigos(nodoUsuario);
+
+        Usuario[] arrayAmigosDeAmigos = amigosDeAmigos.toArray(new Usuario[amigosDeAmigos.getTamano()]);
+
+        return Response.status(Status.OK)
+            .entity(arrayAmigosDeAmigos)
+            .build();
+    }
 
 }

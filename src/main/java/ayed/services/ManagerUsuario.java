@@ -110,12 +110,11 @@ public class ManagerUsuario {
         return amigosEnComun;
     }
 
-    public ListaCustom<Usuario> obtenerAmigosDeAmigos(int idUsuario){
+    public ListaCustom<Usuario> obtenerAmigosDeAmigos(NodoUsuarioGrafo nodoUsuario){
 
         //Lo implemento con tabla Hash para poder buscar en el array mas rapido y corroborar no repetidos. Ya que esta implementado 
         //todo para pasar de una lista hash a una lista.
 
-        NodoUsuarioGrafo nodoUsuario = usuariosGrafo.buscar(idUsuario);
         TablaHash<Integer, Usuario> amigosDeAmigo = new TablaHash<>();
 
         if(nodoUsuario == null){
@@ -133,7 +132,7 @@ public class ManagerUsuario {
             while(amigoDeAmigo != null){
                 int idAmigoDeAmigo = amigoDeAmigo.getDato();
                 
-                if (idAmigoDeAmigo != idUsuario && amigosDeAmigo.buscar(idAmigo) == null)
+                if (idAmigoDeAmigo != nodoUsuario.getUsuario().getIdUsuario() && amigosDeAmigo.buscar(idAmigoDeAmigo) == null)
                 {
                     NodoUsuarioGrafo nodoAmigoDeAmigo = usuariosGrafo.buscar(idAmigoDeAmigo);
                     if (nodoAmigoDeAmigo != null) {
@@ -148,7 +147,39 @@ public class ManagerUsuario {
 
         }
 
-        return amigosDeAmigo.listarValores();
-    }
+        ListaCustom<Usuario> listaAmigosDeAmigos = amigosDeAmigo.listarValores(); 
 
+        // if(listaAmigosDeAmigos.getTamano() == 0){
+        //     return listaAmigosDeAmigos;
+        // }
+
+        // actualAmigo = nodoUsuario.getAmigosIds().getCabeza();
+
+        // Nodo<Usuario> actualAmigoDeAmigos = listaAmigosDeAmigos.getCabeza();
+        // Nodo<Usuario> anteriorAmigoDeAmigos = null;
+
+        // while(actualAmigo != null){   
+        //     int idAmigo = actualAmigo.getDato();
+            
+        //     while (actualAmigoDeAmigos != null){
+        //         if (actualAmigoDeAmigos.getDato().getIdUsuario() == idAmigo){
+        //             if (anteriorAmigoDeAmigos == null){
+        //                 listaAmigosDeAmigos.setCabeza(actualAmigoDeAmigos.getSiguiente());
+        //             }
+        //             else
+        //             {
+        //                 anteriorAmigoDeAmigos.setSiguiente(actualAmigoDeAmigos.getSiguiente());
+        //                 actualAmigoDeAmigos = actualAmigoDeAmigos.getSiguiente();
+        //                 break;
+        //             }
+        //         }
+        //         anteriorAmigoDeAmigos = actualAmigoDeAmigos;
+        //         actualAmigoDeAmigos = actualAmigoDeAmigos.getSiguiente();
+        //     }
+            
+        // }
+
+
+        return listaAmigosDeAmigos;
+    }
 }

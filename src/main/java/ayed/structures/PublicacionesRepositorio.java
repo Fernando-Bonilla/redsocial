@@ -19,6 +19,7 @@ public class PublicacionesRepositorio {
         this._publicaciones = new ListaCustom<>();
         this._indicePublicaciones = new TablaHash<>();
         crearPublicacionesParaPrueba();
+        crearComentariosHardcodeados();
     }
 
     public ListaCustom<Publicacion> getPublicaciones(){
@@ -142,5 +143,19 @@ public class PublicacionesRepositorio {
         _publicaciones.agregarAlInicio(publicacion);        
         _indicePublicaciones.insertar(idPublicacion, publicacion);
 
+    }
+
+    public void crearComentariosHardcodeados(){
+        // comentarPublicacion(int idPub, int idAutorComentario , String comentarioCuerpo)
+        comentarPublicacion(27, 1 , "Si, tal cual, estaba meta agitar");
+        comentarPublicacion(27, 2 , "Como loco cantando, donde estan los ladroneeeeees!");
+        comentarPublicacion(27, 4 , "ATR el tipo");
+
+        comentarPublicacion(28, 5 , "Ha no aflojar Juan dale que queda poquito");
+
+        comentarPublicacion(25, 1 , "Si tal cual, vamo arriba");
+
+        comentarPublicacion(23, 10 , "Me encantan las fiestas, una cosa de locos");
+        comentarPublicacion(23, 11 , "Un embole");
     }
 }

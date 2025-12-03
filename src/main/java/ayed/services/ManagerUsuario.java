@@ -152,38 +152,51 @@ public class ManagerUsuario {
 
         ListaCustom<Usuario> listaAmigosDeAmigos = amigosDeAmigo.listarValores(); 
 
-        // if(listaAmigosDeAmigos.getTamano() == 0){
-        //     return listaAmigosDeAmigos;
-        // }
-
-        // actualAmigo = nodoUsuario.getAmigosIds().getCabeza();
-
-        // Nodo<Usuario> actualAmigoDeAmigos = listaAmigosDeAmigos.getCabeza();
-        // Nodo<Usuario> anteriorAmigoDeAmigos = null;
-
-        // while(actualAmigo != null){   
-        //     int idAmigo = actualAmigo.getDato();
-            
-        //     while (actualAmigoDeAmigos != null){
-        //         if (actualAmigoDeAmigos.getDato().getIdUsuario() == idAmigo){
-        //             if (anteriorAmigoDeAmigos == null){
-        //                 listaAmigosDeAmigos.setCabeza(actualAmigoDeAmigos.getSiguiente());
-        //             }
-        //             else
-        //             {
-        //                 anteriorAmigoDeAmigos.setSiguiente(actualAmigoDeAmigos.getSiguiente());
-        //                 actualAmigoDeAmigos = actualAmigoDeAmigos.getSiguiente();
-        //                 break;
-        //             }
-        //         }
-        //         anteriorAmigoDeAmigos = actualAmigoDeAmigos;
-        //         actualAmigoDeAmigos = actualAmigoDeAmigos.getSiguiente();
-        //     }
-            
-        // }
-
+        listaAmigosDeAmigos = filtrarLista(listaAmigosDeAmigos, nodoUsuario.getAmigosIds());
 
         return listaAmigosDeAmigos;
+    }
+
+    public ListaCustom<Usuario> filtrarLista(ListaCustom<Usuario> listaBase, ListaCustom<Integer> listaIds)
+    {
+        Nodo<Usuario> actual = listaBase.getCabeza();
+        Nodo<Usuario> anterior = null;
+        Nodo<Integer> comparado = listaIds.getCabeza();
+
+        if(comparado == null){
+            return listaBase;
+        }
+
+        while(actual != null)
+        {
+            int idActual = actual.getDato().getIdUsuario();
+
+            while(comparado != null)
+            {
+                if(comparado.getDato() == idActual)
+                {
+                    if(anterior == null)
+                    {
+                        listaBase.setCabeza(actual.getSiguiente());
+                    }
+                    else
+                    {
+                        anterior.setSiguiente(actual.getSiguiente());
+                    }
+                    break;
+                }
+
+                comparado = comparado.getSiguiente();
+
+            }
+
+            anterior = actual;
+            actual = actual.getSiguiente();
+            comparado = listaIds.getCabeza();
+
+        }
+    
+        return listaBase;
     }
 
     public ListaCustom<Usuario> usuariosRegistradosPorPeriodo(LocalDate desde, LocalDate hasta) {

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import ayed.resources.PublicacionesResource;
+import ayed.resources.ReportesResource;
 import ayed.resources.UsuariosResource;
 import jakarta.ws.rs.core.Application;
 
@@ -16,6 +17,7 @@ public class AppConfig extends Application {
         
         resources.add(UsuariosResource.class);
         resources.add(PublicacionesResource.class);
+        resources.add(ReportesResource.class);
 
         return resources;
     }

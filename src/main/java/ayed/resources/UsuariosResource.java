@@ -36,7 +36,7 @@ public class UsuariosResource {
     public Response crearUsuario(UsuarioRequestDTO dto){
         if(dto == null){
             return Response.status(Status.BAD_REQUEST)
-                .entity(" ")
+                .entity("Por favor complete todos los datos")
                 .build();
         }           
 

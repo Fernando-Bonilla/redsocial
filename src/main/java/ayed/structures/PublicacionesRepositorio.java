@@ -99,7 +99,33 @@ public class PublicacionesRepositorio {
         crearPublicacionInicial(3, "Pisteando como un campeon");
         crearPublicacionInicial(4, "Como dijo paulo cohelo, no hay insomnio que aguante...");
         crearPublicacionInicial(5, "asdasdasdasd");
-        crearPublicacionInicial(5, "alto alto");       
+        crearPublicacionInicial(5, "alto alto");
+        
+        crearPublicacionInicial(1, "Publicaciones como loco");
+        crearPublicacionInicial(1, "lorem ipsum");
+        crearPublicacionInicial(2, "Aguante peñarooool");
+        crearPublicacionInicial(3, "Estamos todos locos, como van a permitir esto");
+        crearPublicacionInicial(4, "Ayer andaba dando vueltas en el barrio gente rara, tengan cuidado vecinos");
+        crearPublicacionInicial(5, "Esto en un pais encerio no pasa");
+        crearPublicacionInicial(5, "awante bokitaaaaaaa");  
+
+        crearPublicacionInicial(6, "Ayer pase por tu casa y me tiraste con un ladrillo");
+        crearPublicacionInicial(7, "Nachito se la comeeeee");
+        crearPublicacionInicial(8, "Nelson baja de la nube de pedos por favor");
+        crearPublicacionInicial(9, "Me encanta la materia de Algoritmos");
+        crearPublicacionInicial(10, "No doy mas, estoy cansado jefe");
+        crearPublicacionInicial(10, "Como será la laguna que el chancho la cruza al trote");
+        crearPublicacionInicial(11, "vamo que ya se termina, fuerza gente");
+        crearPublicacionInicial(11, "Si tu tambien crees que vas a exonerar escribe Amen en los comentarios");
+
+        crearPublicacionInicial(12, "Vamos que ya estamos ahi, en breve es navidad");
+        crearPublicacionInicial(12, "El ultimo parcial hay que meterle, asi se exonera");
+        crearPublicacionInicial(12, "Salimos muy bien preparados, no como los que hacen cursitos y en 3 meses son full stack");
+        crearPublicacionInicial(12, "El 2026 va a ser mi año, dijo ludovica");
+        crearPublicacionInicial(12, "Fernando dicen que te vieron en el recital de Shakira");
+        crearPublicacionInicial(12, "Terminamos este obligatorio y nos que da el de Ingenieria");
+        crearPublicacionInicial(12, "Dale que vamos");
+        crearPublicacionInicial(12, "Ultima publicacion, chau");
 
     }
 

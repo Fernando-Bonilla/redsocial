@@ -1,5 +1,8 @@
 package ayed.services;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import ayed.models.Usuario;
 import ayed.structures.ListaCustom;
 import ayed.structures.Nodo;
@@ -182,4 +185,65 @@ public class ManagerUsuario {
 
         return listaAmigosDeAmigos;
     }
+
+    public ListaCustom<Usuario> usuariosRegistradosPorPeriodo(LocalDate desde, LocalDate hasta) {
+
+        // busco todos los usuarios
+        ListaCustom<Usuario> todosLosUsuarios = usuariosRepo.getUsuarios();
+        // acá ya me armo donde voy a ir metiendo los usuarios que se registraron en el periodo especificado
+        ListaCustom<Usuario> usuariosFiltrados = new ListaCustom<>();
+
+        Nodo<Usuario> actual = todosLosUsuarios.getCabeza();
+        while (actual != null) {
+
+            Usuario usuario = actual.getDato();
+
+            //como tenemos la propiedad fechaRegistro en LocalDateTime, la parseo a LocalDate
+            LocalDate fechaRegistro = usuario.getFechaRegistro().toLocalDate();
+
+            // en java las fechas no se puede comparar con >=, se usan isAfter e isBefore            
+            if((fechaRegistro.isAfter(desde) || fechaRegistro.isEqual(desde)) && (fechaRegistro.isBefore(hasta) || fechaRegistro.isEqual(hasta))){
+                usuariosFiltrados.agregarAlInicio(usuario);
+            }
+
+            actual = actual.getSiguiente();
+        }
+
+        //return usuariosFiltrados;
+
+        // ahora que tengo los usuarios filtrados voy a usar el bubble sort para ordenarlos por fecha de registro
+        int cantidad = usuariosFiltrados.getTamano();   
+
+        Usuario[] usuariosFiltradosYOrdenados = new Usuario[cantidad]; // usuariosFiltradosYOrdenados (aunque todavia no estan ordenados pero bueno)
+        usuariosFiltradosYOrdenados = usuariosFiltrados.toArray(usuariosFiltradosYOrdenados);
+
+        // ahora recorro el array comparando las fechas de registro e intercambiando
+        for(int i = 0; i < usuariosFiltradosYOrdenados.length; i ++){
+            for(int j = i + 1; j < usuariosFiltradosYOrdenados.length; j++){
+
+                LocalDateTime fechaUno = usuariosFiltradosYOrdenados[i].getFechaRegistro();
+                LocalDateTime fechaDos = usuariosFiltradosYOrdenados[j].getFechaRegistro();
+
+                // si el de la izquierda es despues del de la derecha los swapeo
+                if(fechaUno.isAfter(fechaDos)){
+                    Usuario temporal = usuariosFiltradosYOrdenados[j];
+                    usuariosFiltradosYOrdenados[j] = usuariosFiltradosYOrdenados[i];
+                    usuariosFiltradosYOrdenados[i] = temporal;
+                }
+            }
+        }
+
+        // ahora que tengo el array ordenado lo paso a ListaCustom, y vos me preguntaras, para que diablo pasarlo a lista de nuevo y no devolver el array?
+        // solo para seguir igual como lo veniamos haciendo en el resto del codigo, y que el endpoint lo pase a array.
+        
+        // aca voy a empezar a recorrer el array desde el final, porque (te amo Juan) el metodo AgregarAlInicio de ListaCustom agrega el nodo al principio, polque? no hay polque dijo la china
+        ListaCustom<Usuario> listaConUsuariosFiltradosYordenados = new ListaCustom<>();
+        for(int i = usuariosFiltradosYOrdenados.length - 1; i >= 0; i--){
+            listaConUsuariosFiltradosYordenados.agregarAlInicio(usuariosFiltradosYOrdenados[i]);
+        }
+
+        return listaConUsuariosFiltradosYordenados;
+
+    }    
+
 }

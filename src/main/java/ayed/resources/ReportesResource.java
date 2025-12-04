@@ -84,8 +84,15 @@ public class ReportesResource {
 
         Publicacion[] arrPublicaciones = listaPublicaciones.toArray(new Publicacion[cantidadPub]);
 
+        // ahora lo mapeo a dto
+        PublicacionTopResponseDTO[] dto = new PublicacionTopResponseDTO[cantidadPub];
+
+        for(int i = 0; i < arrPublicaciones.length; i++) {
+            dto[i] = new PublicacionTopResponseDTO(arrPublicaciones[i]);
+        }
+
         return Response.status(Status.ACCEPTED)
-            .entity(arrPublicaciones)
+            .entity(dto)
             .build();
 
     }

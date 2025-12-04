@@ -35,4 +35,8 @@ public class Publicacion {
     public ListaCustom<Comentario> getComentarios(){
         return comentarios;
     }
+    
+    public Comentario[] getComentariosArray() {
+        return comentarios.toArray(new Comentario[comentarios.getTamano()]);
+    }
 }

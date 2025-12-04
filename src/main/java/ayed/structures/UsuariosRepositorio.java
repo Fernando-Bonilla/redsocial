@@ -65,7 +65,7 @@ public class UsuariosRepositorio {
 
     }
 
-    private void crearUsuarioInicial(String email, String nombre, String apellido, String genero, LocalDateTime fechaRegistro, String nacionalidad){
+    private void crearUsuarioInicial(String email, String nombre, String apellido, String genero, LocalDateTime fechaRegistro){
         int id = generarIdUsuario();
 
         Usuario usuario = new Usuario(

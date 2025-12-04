@@ -15,14 +15,14 @@ public class Usuario {
 
     private ListaCola<Notificacion> notificaciones;
 
-    public Usuario(int idUsuario, String email, String nombre, String apellido, String genero, LocalDateTime fechaRegistro, String nacionalidad) {
+    public Usuario(int idUsuario, String email, String nombre, String apellido, String genero, String nacionalidad, LocalDateTime fechaRegistro) {
         this.idUsuario = idUsuario;
         this.email = email;
         this.nombre = nombre;
         this.apellido = apellido;
         this.genero = genero;
-        this.fechaRegistro = fechaRegistro;
         this.nacionalidad = nacionalidad;
+        this.fechaRegistro = fechaRegistro;        
 
         // por las dudas creo una lista vacia para evitar conflictos
         this.notificaciones = new ListaCola<Notificacion>();

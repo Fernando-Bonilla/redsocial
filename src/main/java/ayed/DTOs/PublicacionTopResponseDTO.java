@@ -9,6 +9,7 @@ public class PublicacionTopResponseDTO {
     private int idAutor;
     private java.time.LocalDateTime fechaPublicacion;
     private Comentario[] comentarios;
+    private int cantidad;
 
     public PublicacionTopResponseDTO(Publicacion pub) {
         this.idPublicacion = pub.getIdPublicacion();
@@ -16,6 +17,7 @@ public class PublicacionTopResponseDTO {
         this.idAutor = pub.getIdAutor();
         this.fechaPublicacion = pub.getFechaPublicacion();
         this.comentarios = pub.getComentariosArray(); 
+        this.cantidad = pub.getComentarios().getTamano();
     }
 
     public int getIdPublicacion() { 
@@ -32,6 +34,10 @@ public class PublicacionTopResponseDTO {
     
     public java.time.LocalDateTime getFechaPublicacion() { 
         return fechaPublicacion; 
+    }
+
+    public int getCantidad(){
+        return cantidad;
     }
 
     public Comentario[] getComentarios() { 

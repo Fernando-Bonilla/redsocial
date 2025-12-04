@@ -10,21 +10,22 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private String genero;
+    private String nacionalidad;
     private LocalDateTime fechaRegistro;
 
     private ListaCola<Notificacion> notificaciones;
 
-    public Usuario(int idUsuario, String email, String nombre, String apellido, String genero, LocalDateTime fechaRegistro) {
+    public Usuario(int idUsuario, String email, String nombre, String apellido, String genero, LocalDateTime fechaRegistro, String nacionalidad) {
         this.idUsuario = idUsuario;
         this.email = email;
         this.nombre = nombre;
         this.apellido = apellido;
         this.genero = genero;
         this.fechaRegistro = fechaRegistro;
+        this.nacionalidad = nacionalidad;
 
         // por las dudas creo una lista vacia para evitar conflictos
         this.notificaciones = new ListaCola<Notificacion>();
-
     }
 
     public Usuario() {}
@@ -41,6 +42,10 @@ public class Usuario {
     public void setGenero(String genero) { this.genero = genero; }
     public LocalDateTime getFechaRegistro() { return fechaRegistro; }
     public void setFechaRegistro(LocalDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
+
+    public void setNacionalidad(String nacionalidad) {this.nacionalidad = nacionalidad;}
+    public String getNacionalidad() { return nacionalidad }
+
 
     public ListaCola<Notificacion> getNotificaciones(){
         return notificaciones;

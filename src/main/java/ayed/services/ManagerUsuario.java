@@ -259,4 +259,40 @@ public class ManagerUsuario {
 
     }    
 
+    public int sumaDiscriminada(String nacionalidad, String genero)
+    {
+        System.out.print("sumando");
+        ListaCustom<Usuario> listaUsuarios = usuariosRepo.getUsuarios();
+        Nodo<Usuario> actual = listaUsuarios.getCabeza();
+
+        int suma = 0;
+
+        if(nacionalidad == null && genero == null)
+        {
+            return listaUsuarios.getTamano();
+        }
+
+        if(nacionalidad == null)
+        {
+            nacionalidad = "";
+        }
+
+        if(genero == null)
+        {
+            genero = "";
+        }
+
+        while(actual != null)
+        {
+            Usuario usuario = actual.getDato();
+            if(usuario.getNacionalidad().equalsIgnoreCase(nacionalidad) && usuario.getGenero().equalsIgnoreCase(genero))
+            {
+                suma++;
+            }
+            actual = actual.getSiguiente();
+        }
+
+        return suma;
+
+    }
 }

@@ -97,5 +97,16 @@ public class ReportesResource {
 
     }
     
+    @GET
+    @Path("sumatoria/{nacionalidad}/{genero}")
+    public Response sumatoriaUsuariosDiscriminado(@PathParam("nacionalidad") String nacionalidad, @PathParam("genero") String genero )
+    {
+        System.out.println("Nacionalidad: " + nacionalidad + " Genero: " + genero);
+        int suma = managerUsuario.sumaDiscriminada(nacionalidad, genero);
+
+        SumatoriaDiscriminadaResponseDTO dto = new SumatoriaDiscriminadaResponseDTO(suma, nacionalidad, genero);
+
+        return Response.status(Status.OK).entity(dto).build();
+    }   
 
 }

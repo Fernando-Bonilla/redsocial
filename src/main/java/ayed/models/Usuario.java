@@ -44,7 +44,7 @@ public class Usuario {
     public void setFechaRegistro(LocalDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
 
     public void setNacionalidad(String nacionalidad) {this.nacionalidad = nacionalidad;}
-    public String getNacionalidad() { return nacionalidad }
+    public String getNacionalidad() { return nacionalidad; }
 
 
     public ListaCola<Notificacion> getNotificaciones(){

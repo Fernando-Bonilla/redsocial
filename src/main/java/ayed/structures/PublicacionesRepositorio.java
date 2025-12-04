@@ -93,6 +93,44 @@ public class PublicacionesRepositorio {
         
     }
 
+    public ListaCustom<Publicacion> topTenPublicacionesMasComentadas(){
+
+        int totalPublicacines = _publicaciones.getTamano();
+        // si no hay publicaciones devuelvo lista vacia
+        if(totalPublicacines == 0) {
+            return new ListaCustom<>();
+        }
+
+        // paso las publicaciones a un array para despues ordenar por cantidad de comentarios usando el bubble sort
+        Publicacion[] publicacionesArray = _publicaciones.toArray(new Publicacion[totalPublicacines]);
+
+        // ahora recorro el array y lo voy ordenando por cantidad de comentarios
+        for(int i = 0; i < totalPublicacines - 1; i++) {
+            for(int j = i + 1; j < totalPublicacines -1; j++) {
+
+                int cantComentarioPublicacionUno = publicacionesArray[i].getComentarios().getTamano();
+                int cantComentariosPublicacionDos = publicacionesArray[j].getComentarios().getTamano();
+
+                if(cantComentariosPublicacionDos > cantComentarioPublicacionUno) {
+                    Publicacion temporal = publicacionesArray[i];
+                    publicacionesArray[i] = publicacionesArray[j]; // aca swapeo 
+                    publicacionesArray[j] = temporal;
+                }
+            }
+        }
+
+        ListaCustom<Publicacion> topTen = new ListaCustom<>();
+        int limitePub = 10;
+
+        // recorro el array arancado desde el final porque el metodo en la listaCustom de agregar, agrega al inicio
+        for(int i = limitePub - 1; i >= 0; i--){
+            topTen.agregarAlInicio(publicacionesArray[i]);
+        }
+
+        return topTen;
+
+    }
+
     private void crearPublicacionesParaPrueba(){
         crearPublicacionInicial(1, "Testeando publicacion");
         crearPublicacionInicial(1, "Alto chango yo soy");
@@ -157,5 +195,6 @@ public class PublicacionesRepositorio {
 
         comentarPublicacion(23, 10 , "Me encantan las fiestas, una cosa de locos");
         comentarPublicacion(23, 11 , "Un embole");
+        comentarPublicacion(22, 11 , "Amen");
     }
 }

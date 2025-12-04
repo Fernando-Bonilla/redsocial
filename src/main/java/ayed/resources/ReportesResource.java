@@ -5,12 +5,14 @@ import java.time.format.DateTimeFormatter;
 
 import ayed.DTOs.UsuariosPeriodoRegistroRequestDTO;
 import ayed.DTOs.*;
+import ayed.models.Publicacion;
 import ayed.models.Usuario;
 import ayed.services.ManagerUsuario;
 import ayed.structures.ListaCola;
 import ayed.structures.ListaCustom;
 import ayed.structures.Nodo;
 import ayed.structures.NodoUsuarioGrafo;
+import ayed.structures.PublicacionesRepositorio;
 import ayed.structures.UsuariosRepositorio;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -29,6 +31,8 @@ import jakarta.ws.rs.core.Response.Status;
 public class ReportesResource {
 
     private final UsuariosRepositorio repo = UsuariosRepositorio.getInstance();
+    private final PublicacionesRepositorio pubRepo = PublicacionesRepositorio.getInstance();
+
     private final ManagerUsuario managerUsuario = new ManagerUsuario();
     private final DateTimeFormatter formateadorDeFecha = DateTimeFormatter.ofPattern( "dd/MM/yyyy" ); 
     
@@ -69,6 +73,21 @@ public class ReportesResource {
             .entity(dtoResponse)
             .build();       
         
+    }
+
+    @GET
+    @Path("top-publicaciones")
+    public Response topTenPublicaciones(){
+        ListaCustom<Publicacion> listaPublicaciones = pubRepo.topTenPublicacionesMasComentadas();
+
+        int cantidadPub = listaPublicaciones.getTamano();
+
+        Publicacion[] arrPublicaciones = listaPublicaciones.toArray(new Publicacion[cantidadPub]);
+
+        return Response.status(Status.ACCEPTED)
+            .entity(arrPublicaciones)
+            .build();
+
     }
     
 

@@ -15,7 +15,7 @@ public class Usuario {
 
     private ListaCola<Notificacion> notificaciones;
 
-    public Usuario(int idUsuario, String email, String nombre, String apellido, String genero, String nacionalidad, LocalDateTime fechaRegistro) {
+    public Usuario(int idUsuario, String email, String nombre, String apellido, String genero, LocalDateTime fechaRegistro, String nacionalidad) {
         this.idUsuario = idUsuario;
         this.email = email;
         this.nombre = nombre;

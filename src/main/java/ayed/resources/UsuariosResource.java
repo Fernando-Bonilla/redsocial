@@ -47,7 +47,8 @@ public class UsuariosResource {
             dto.getNombre(),
             dto.getApellido(),
             dto.getGenero(),
-            LocalDateTime.now()
+            dto.getNacionalidad(),
+            LocalDateTime.now()            
         );
 
         // Guarda en la lista enlazada generica

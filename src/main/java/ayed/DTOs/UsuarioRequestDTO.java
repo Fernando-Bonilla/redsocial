@@ -5,16 +5,18 @@ public class UsuarioRequestDTO {
     private String nombre;
     private String apellido;
     private String genero;
+    private String nacionalidad;
 
     public UsuarioRequestDTO(){
 
     }
 
-    public UsuarioRequestDTO(String email, String nombre, String apellido, String genero){
+    public UsuarioRequestDTO(String email, String nombre, String apellido, String genero, String nacionalidad){
         this.email = email;
         this.nombre = nombre;
         this.apellido = apellido;
         this.genero = genero;
+        this.nacionalidad = nacionalidad;
     }
 
     public String getEmail(){
@@ -47,6 +49,14 @@ public class UsuarioRequestDTO {
 
     public void setGenero(String _value){
         this.genero = _value;
+    }
+
+    public String getNacionalidad(){
+        return nacionalidad;
+    }
+
+    public void setNacionalidad(String _value){
+        this.nacionalidad = _value;
     }
 
 

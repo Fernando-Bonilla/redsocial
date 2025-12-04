@@ -50,22 +50,22 @@ public class UsuariosRepositorio {
     }     
 
     private void crearUsuariosParaPrueba(){
-        crearUsuarioInicial("alberto@gmail.com", "Alberto", "García", "M", LocalDateTime.of(2025, 12, 01, 15, 30));
-        crearUsuarioInicial("pepe@gmail.com", "Pepe",   "Pérez",  "M", LocalDateTime.of(2025, 12, 02, 16, 30));
-        crearUsuarioInicial("carla@gmail.com", "Carla", "López",  "F", LocalDateTime.of(2025, 11, 27, 15, 30));
-        crearUsuarioInicial("cecilia@gmail.com", "Cecilia", "López",  "F", LocalDateTime.now());
-        crearUsuarioInicial("fefo@gmail.com", "Fede", "Roro",  "M", LocalDateTime.now());
-        crearUsuarioInicial("fernando@gmail.com", "Fernando", "Bonilla",  "M", LocalDateTime.now());
-        crearUsuarioInicial("matias@gmail.com", "Matias", "Arruabarrena",  "M", LocalDateTime.now());
-        crearUsuarioInicial("rupestre@gmail.com", "Ruben", "Yorugua",  "M", LocalDateTime.now());
-        crearUsuarioInicial("laMona@gmail.com", "Ramon", "Gimenez",  "M", LocalDateTime.now());
-        crearUsuarioInicial("pipi@gmail.com", "Pipona", "Alberti",  "F", LocalDateTime.now());
-        crearUsuarioInicial("miguelAltoChango@gmail.com", "Miguel", "Perez",  "M", LocalDateTime.now());
-        crearUsuarioInicial("natalia@gmail.com", "Natalia", "Murriaga",  "F", LocalDateTime.now());
+        crearUsuarioInicial("alberto@gmail.com", "Alberto", "García", "M", "Uruguay", LocalDateTime.of(2025, 12, 01, 15, 30));
+        crearUsuarioInicial("pepe@gmail.com", "Pepe",   "Pérez", "M", "Uruguay", LocalDateTime.of(2025, 12, 02, 16, 30));
+        crearUsuarioInicial("carla@gmail.com", "Carla", "López",  "F", "Uruguay", LocalDateTime.of(2025, 11, 27, 15, 30));
+        crearUsuarioInicial("cecilia@gmail.com", "Cecilia", "López",  "F", "Uruguay", LocalDateTime.now());
+        crearUsuarioInicial("fefo@gmail.com", "Fede", "Roro",  "M", "Argentina", LocalDateTime.now());
+        crearUsuarioInicial("fernando@gmail.com", "Fernando", "Bonilla",  "M", "Argentina", LocalDateTime.now());
+        crearUsuarioInicial("matias@gmail.com", "Matias", "Arruabarrena",  "M", "Argentina", LocalDateTime.now());
+        crearUsuarioInicial("rupestre@gmail.com", "Ruben", "Yorugua",  "M", "Argentina", LocalDateTime.now());
+        crearUsuarioInicial("laMona@gmail.com", "Ramon", "Gimenez",  "M", "Argentina", LocalDateTime.now());
+        crearUsuarioInicial("pipi@gmail.com", "Pipona", "Alberti",  "F", "Argentina", LocalDateTime.now());
+        crearUsuarioInicial("miguelAltoChango@gmail.com", "Miguel", "Perez", "M", "Peru", LocalDateTime.now());
+        crearUsuarioInicial("natalia@gmail.com", "Natalia", "Murriaga",  "F", "Brasil", LocalDateTime.now());
 
     }
 
-    private void crearUsuarioInicial(String email, String nombre, String apellido, String genero, LocalDateTime fechaRegistro){
+    private void crearUsuarioInicial(String email, String nombre, String apellido, String genero, String nacionalidad, LocalDateTime fechaRegistro){
         int id = generarIdUsuario();
 
         Usuario usuario = new Usuario(
@@ -74,6 +74,7 @@ public class UsuariosRepositorio {
             nombre,
             apellido,
             genero,
+            nacionalidad,
             fechaRegistro
         );
 

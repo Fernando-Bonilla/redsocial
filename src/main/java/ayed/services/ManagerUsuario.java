@@ -48,7 +48,28 @@ public class ManagerUsuario {
 
     public boolean eliminarUsuario(int idUsuario)
     {
-        return usuariosGrafo.eliminiar(idUsuario);
+        if(usuariosGrafo.eliminiar(idUsuario))
+        {
+            // Tambien debo eliminar a este usuario de las listas de amigos de los demas usuarios
+            ListaCustom<Usuario> listaUsuarios = usuariosRepo.getUsuarios();
+            Nodo<Usuario> actual = listaUsuarios.getCabeza();
+            Nodo<Usuario> anterior = null;
+
+            while(actual != null){
+                int idActual = actual.getDato().getIdUsuario();
+                if(idActual == idUsuario){
+                    if(anterior == null){
+                        listaUsuarios.setCabeza(actual.getSiguiente());
+                    } else {
+                        anterior.setSiguiente(actual.getSiguiente());
+                    }
+                    return true;
+                }
+                anterior = actual;
+                actual = actual.getSiguiente();
+            }
+        }
+        return false;
     }
 
     public ListaCustom<Usuario> obtenerUsuarios(){

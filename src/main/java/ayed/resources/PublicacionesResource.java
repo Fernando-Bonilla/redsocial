@@ -56,7 +56,7 @@ public class PublicacionesResource {
                 .build();
         }
 
-        // Ahora creo la puclikeishon
+        // Ahora creo la publikeishon
         Publicacion nuevaPub = pubRepo.agregarPublicacion(idAutor, cuerpoPub);
                
         return Response.status(Status.CREATED)
@@ -80,13 +80,7 @@ public class PublicacionesResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{idPublicacion}/comentar")
-    public Response comentarPublicacion(@PathParam("idPublicacion") int idPublicacion, ComentarioRequestDTO dto){
-
-        /* System.out.println("idPublicacion: " + idPublicacion + "idAutor: ");
-
-        return Response.status(Status.ACCEPTED)
-            .entity("asd")
-            .build(); */
+    public Response comentarPublicacion(@PathParam("idPublicacion") int idPublicacion, ComentarioRequestDTO dto){        
 
         if (dto == null) {
         return Response.status(Status.BAD_REQUEST)

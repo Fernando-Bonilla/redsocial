@@ -261,7 +261,6 @@ public class ManagerUsuario {
 
     public int sumaDiscriminada(String nacionalidad, String genero)
     {
-        System.out.print("sumando");
         ListaCustom<Usuario> listaUsuarios = usuariosRepo.getUsuarios();
         Nodo<Usuario> actual = listaUsuarios.getCabeza();
 
@@ -282,10 +281,17 @@ public class ManagerUsuario {
             genero = "";
         }
 
+        String nacionalidadUsuario;
+        String generoUsuario;
+
         while(actual != null)
         {
             Usuario usuario = actual.getDato();
-            if(usuario.getNacionalidad().equalsIgnoreCase(nacionalidad) && usuario.getGenero().equalsIgnoreCase(genero))
+            
+            nacionalidadUsuario = usuario.getNacionalidad();
+            generoUsuario = usuario.getGenero();
+            
+            if(nacionalidad.equalsIgnoreCase((nacionalidadUsuario == null ? "" : nacionalidadUsuario)) && genero.equalsIgnoreCase((generoUsuario == null ? "" : generoUsuario)))
             {
                 suma++;
             }

@@ -82,7 +82,7 @@ public class UsuariosResource {
     @GET    
     @Produces(MediaType.APPLICATION_JSON)
     public Response ListarUsuarios(){        
-        ListaCustom<Usuario> usuarios = managerUsuario.obtenerUsuarios();
+        ListaCustom<Usuario> usuarios = repo.getUsuarios();
 
         if (usuarios.getTamano() == 0){
             return Response.status(Status.NO_CONTENT).build();
@@ -112,6 +112,7 @@ public class UsuariosResource {
         userMod.setNombre(user.getNombre());
         userMod.setApellido(user.getApellido());
         userMod.setGenero(user.getGenero());
+        userMod.setNacionalidad(user.getNacionalidad());
 
         return Response.status(Status.OK).entity(userMod).build();
     }

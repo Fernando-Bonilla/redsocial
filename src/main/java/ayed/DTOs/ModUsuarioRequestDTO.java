@@ -6,13 +6,15 @@ public class ModUsuarioRequestDTO {
     private String nombre;
     private String apellido;
     private String genero;
+    private String nacionalidad;
 
-    public ModUsuarioRequestDTO(int idUsuario, String email, String nombre, String apellido, String genero) {
+    public ModUsuarioRequestDTO(int idUsuario, String email, String nombre, String apellido, String genero, String nacionalidad) {
         this.idUsuario = idUsuario;
         this.email = email;
         this.nombre = nombre;
         this.apellido = apellido;
         this.genero = genero;
+        this.nacionalidad = nacionalidad;
     }
 
     public ModUsuarioRequestDTO() {}
@@ -27,6 +29,8 @@ public class ModUsuarioRequestDTO {
     public void setApellido(String apellido) { this.apellido = apellido; }
     public String getGenero() { return genero; }
     public void setGenero(String genero) { this.genero = genero; }
+    public String getNacionalidad() { return nacionalidad; }
+    public void setNacionalidad(String nacionalidad) { this.nacionalidad = nacionalidad; }
 }
 
 

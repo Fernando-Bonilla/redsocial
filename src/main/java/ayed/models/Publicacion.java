@@ -11,7 +11,7 @@ public class Publicacion {
     private LocalDateTime fechaPublicacion;
 
     // propiedad tipo lista enlazada para guardar los comentarios de cada publicacion
-    private ListaCustom<Comentario> comentarios;
+    private final ListaCustom<Comentario> comentarios;
      
     public Publicacion(int idPublicacion, String mensaje, int idAutor, LocalDateTime fechaPublicacion) {
         this.idPublicacion = idPublicacion;
@@ -20,7 +20,7 @@ public class Publicacion {
         this.fechaPublicacion = fechaPublicacion;
 
         // para crear la lista vacia en el new
-        this.comentarios = new ListaCustom<Comentario>();
+        this.comentarios = new ListaCustom<>();
     }
 
     public int getIdPublicacion() { return idPublicacion; }

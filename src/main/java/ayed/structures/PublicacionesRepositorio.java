@@ -1,12 +1,9 @@
 package ayed.structures;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 
 import ayed.models.Comentario;
-import ayed.models.Notificacion;
 import ayed.models.Publicacion;
-import ayed.models.Usuario;
 
 public class PublicacionesRepositorio {    
     public static PublicacionesRepositorio _instance;

@@ -14,31 +14,22 @@
 ```mvn package```
 ```java -jar target\jaxrs-demo-1.0-SNAPSHOT.jar```
 
-## Estructura sugerida
 
-```/RedSocialAYED```/
-```/|-- pom.xml                <-- Archivo de configuración de Maven```/
-```/|-- /src```/
-```/|   |-- /main```/
-```/|   |   |-- /java```/
-```/|   |   |   |-- /uy/edu/instituto/ayed```/
-```/|   |   |   |   |-- /config          <-- Configuración del Servidor (JAX-RS Application)```/
-```/|   |   |   |   |   |-- AppConfig.java```/
-```/|   |   |   |   |-- /model           <-- Entidades de Datos```/
-```/|   |   |   |   |   |-- Usuario.java```/
-```/|   |   |   |   |   |-- Publicacion.java```/
-```/|   |   |   |   |   |-- Notificacion.java```/
-```/|   |   |   |   |-- /structures      <-- ¡Tus implementaciones propias!```/
-```/|   |   |   |   |   |-- ListaEnlazada.java```/
-```/|   |   |   |   |   |-- Cola.java```/
-```/|   |   |   |   |   |-- HashTable.java```/
-```/|   |   |   |   |   |-- Grafo.java```/
-```/|   |   |   |   |-- /manager         <-- Lógica de Negocio y Estructuras Centrales```/
-```/|   |   |   |   |   |-- RedSocialManager.java (Contiene las instancias de Grafo, HashTable, etc.)```/
-```/|   |   |   |   |-- /resource        <-- Tus Endpoints JAX-RS (Servicios REST)```/
-```/|   |   |   |   |   |-- UsuarioResource.java```/
-```/|   |   |   |   |   |-- PublicacionResource.java```/
-```/|   |   |   |   |   |-- ConsultaResource.java```/
-```/|   |   |   |   |-- MainApp.java     <-- Clase principal para iniciar el servidor```
-```/|   |   |-- /resources   <-- Archivos de configuración, si los hay. ```
+## Requisitos para ejecutar el proyecto solo usando el archivo jar
 
+- Version de java utilizada 21.0.8
+
+Se comparten las dos versiones de archivos jar, la que viene con todas las dependencias incluidas y la que viene si ellas:
+- jaxrs-demo-1.0-SNAPSHOT-shaded.jar - Version que incluye todas las dependencias 
+- jaxrs-demo-1.0-SNAPSHOT.jar - version sin dependencias.
+
+### Como ejecutar:
+
+1- Ir a la carpeta donde está el archivo:
+    jaxrs-demo-1.0-SNAPSHOT-shaded.jar (archivo con todas las dependencias incluidas)
+
+2- Ejecutar:
+    java -jar jaxrs-demo-1.0-SNAPSHOT-shaded.jar
+
+El servidor levanta en http://localhost:8080 (en mi caso es asi, puede que varíe),
+y se pueden probar los endpoints con Postman.

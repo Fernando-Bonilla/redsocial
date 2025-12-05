@@ -1,7 +1,7 @@
 package ayed.structures;
 
 public class TablaHash<C, V> {
-    private final NodoHash<C, V>[] tabla;
+    private final NodoHash<C, V>[] tabla; 
 
     private final int capacidad;
     private int tamaño;
